@@ -8,20 +8,21 @@ log.setLevel(logging.DEBUG)
 
 
 class EmpWageBuilder:
-
-    def __init__(self):
-        self.check_attendence=0
-
     def emp_attendence(self):
         is_full_time = 1
-        check_attendence = random.randint(0, 1)
+        is_part_time = 2
+        check_attendence = random.randint(0, 3)
         if check_attendence == is_full_time:
-            log.info("Employee is present")
+            log.info("Employee is present full time")
             emp_hr = 8
             return emp_hr
+        elif check_attendence == is_part_time:
+            log.info("Employee is part time")
+            emp_hr = 4
+            return emp_hr
         else:
-            log.info("Employee is absent")
-            emp_hr = 0
+            log.info("employee is absent")
+            emp_hr=0
             return emp_hr
 
     # Create employeeWageBuilder class
