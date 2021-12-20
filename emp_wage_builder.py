@@ -1,39 +1,35 @@
 import logging
 import random
 
-
 logging.basicConfig(filename='emp_wage.log', filemode='w')
 log = logging.getLogger()
 log.setLevel(logging.DEBUG)
 
 
 class EmpWageBuilder:
-    def emp_attendence(self):
-        is_full_time = 1
-        is_part_time = 2
-        check_attendence = random.randint(0, 3)
-        if check_attendence == is_full_time:
-            log.info("Employee is present full time")
-            emp_hr = 8
-            return emp_hr
-        elif check_attendence == is_part_time:
-            log.info("Employee is part time")
-            emp_hr = 4
-            return emp_hr
-        else:
-            log.info("employee is absent")
-            emp_hr=0
-            return emp_hr
 
-    # Create employeeWageBuilder class
-    def cal_daily_wage(self, emp_hr):
-        emp_wage_per_hour = 20
-        emp_wage = emp_hr * emp_wage_per_hour
-        return emp_wage
+    def __init__(self, emp_hr=0, emp_wage=0, total_emp_wage=0):
+        self.emp_hr = emp_hr
+        self.emp_wage = emp_wage
+        self.total_emp_wage = total_emp_wage
+
+    def total_employee_wage(self):
+        no_working_day = 20
+        emp_rate_per_hr = 20
+        for day in range(1, no_working_day):
+            emp_check = random.randint(1, 3)
+            self.emp_hr = self.get_work_hours(emp_check)
+            self.emp_wage = self.emp_hr * emp_rate_per_hr
+            self.total_emp_wage = self.total_emp_wage + self.emp_wage
+            print("Total Monthly Wages:", self.total_emp_wage)
+
+    def get_work_hours(self, value):
+        switcher = {
+            1: 8, 2: 4, 3: 0
+        }
+        return switcher.get(value)
 
 
 if __name__ == '__main__':
     emp = EmpWageBuilder()
-    emp_hr = emp.emp_attendence()
-    daily_wage = emp.cal_daily_wage(emp_hr)
-    print(daily_wage)
+    emp.total_employee_wage()
