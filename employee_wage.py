@@ -1,5 +1,6 @@
 import random
 
+
 class EmployeeWageBuilder:
     is_present = 1
     is_part_time = 2
@@ -40,6 +41,7 @@ class EmployeeWageBuilder:
         prints the total wage of the respective company's employee
         :return:
         """
+        global daily_wage
         working_days = 0
         working_hours = 0
         total_wage = 0
@@ -56,6 +58,7 @@ class EmployeeWageBuilder:
 
 
 class Company:
+    totalwages_by_company1 = 0
 
     def __init__(self, name):
         """
@@ -69,15 +72,28 @@ class Company:
         print(employee.compute_wage())
 
     def show_data(self):
+        """
+
+        :return: show data method returns data
+        """
         print("Company name is :- ", company.name)
+        for employee1 in self.employee_list:
+            print("employee name: ", employee1.name)
+            print("maximum working hour of company:", employee1.maximum_working_days)
+            print("maximum working hour of company:", employee1.maximum_working_hours)
+            print("Employee working hour: ", employee1.wage_per_hour)
+
+    def cal_total_wages(self):
+        """
+        calling calculate wages in company class
+        :return:
+        """
         for employee in self.employee_list:
-            print("employee name: ", employee.name)
-            print("maximum working hour of company:", employee.maximum_working_days)
-            print("maximum working hour of company:", employee.maximum_working_hours)
-            print("Employee working hour: ", employee.wage_per_hour)
+            self.totalwages_by_company1 = self.totalwages_by_company1 + employee.compute_wage()
+        print(self.totalwages_by_company1)
 
 
-def get_comp_details(comp_list, name):
+def get_comp_details( comp_list, name ):
     """
     checking the company exist or not
     :param company_list:
@@ -98,6 +114,7 @@ if __name__ == '__main__':
         print("Enter your choice")
         print("1 Add Employee")
         print("2 Show details")
+        print("3 total wages ")
         choice = int(input("Enter your choice"))
         if choice == 1:
             name = input("Enter company name")  # tcs
@@ -118,5 +135,9 @@ if __name__ == '__main__':
             c_name = input("Enter company name")
             company1_list, company = get_comp_details(comp_list, c_name)
             company.show_data()
+        elif choice == 3:
+            c_name = input("Enter company name")
+            company1_list, company = get_comp_details(comp_list, c_name)
+            print(company.cal_total_wages())
         else:
             break
