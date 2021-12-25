@@ -36,3 +36,4 @@ def test_get_comp_details():
     """
     comp = Company("wipro")
     assert isinstance(comp, Company) == True
+
